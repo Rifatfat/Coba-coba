@@ -40,6 +40,28 @@ func inputData(A *tabPengguna, n *int) {
 	}
 }
 
+func tampilanMenu() {
+
+	fmt.Println("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█")
+	fmt.Println("█                      G O   B U D G E T                      █")
+	fmt.Println("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█")
+	fmt.Println("             SELAMAT DATANG DI APLIKASI GO BUDGET             ")
+	fmt.Println("               Aplikasi Pencatatan Keuangan Anda              ")
+	fmt.Println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+	fmt.Println("█                                                             █")
+	fmt.Println("█    ➤  1. Tambah Pengeluaran                                █")
+	fmt.Println("█    ➤  2. Ubah Pengeluaran                                  █")
+	fmt.Println("█    ➤  3. Hapus Pengeluaran                                 █")
+	fmt.Println("█    ➤  4. Lihat Semua Pengeluaran                           █")
+	fmt.Println("█    ➤  5. Cari Pengeluaran                                  █")
+	fmt.Println("█    ➤  6. Urutkan Pengeluaran                               █")
+	fmt.Println("█    ➤  7. Laporan Akhir                                     █")
+	fmt.Println("█    ➤  8. Exit                                              █")
+	fmt.Println("█                                                             █")
+	fmt.Println("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█")
+	fmt.Println(" Tekan angka (1-8) lalu ENTER untuk memulai ")
+}
+
 func tambahPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) {
 	var i, j, IDUser int
 	var pilihan int

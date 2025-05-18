@@ -3,8 +3,6 @@ package main
 func main () {
 
 }
-package main
-
 import "fmt"
 
 type pengguna struct {
@@ -155,4 +153,16 @@ func hapusPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) {
 	fmt.Printf("Berhasil menghapus pengeluaran pada %s ", (*B)[j])
 	fmt.Println(*C)
 
+}
+func lihatSemua(n int) {
+	fmt.Println("╔════════╦════════════════╦════════════╦══════════════╦══════════╦══════════╗")
+	fmt.Println("║   ID   ║      Nama      ║ Akomodasi  ║ Transportasi ║ Makanan  ║ Hiburan  ║")
+	fmt.Println("╠════════╬════════════════╬════════════╬══════════════╬══════════╬══════════╣")
+
+	for i := 0; i < n; i++ {
+		fmt.Printf("║  %-4d ║ %-14s ║ %-10d ║ %-12d ║ %-8d ║ %-8d ║\n",
+			i, pengguna[i], akomodasi[i], transportasi[i], makanan[i], hiburan[i])
+	}
+
+	fmt.Println("╚════════╩════════════════╩════════════╩══════════════╩══════════╩══════════╝")
 }

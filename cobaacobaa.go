@@ -1,37 +1,60 @@
 package main
 
-func main () {
-
-}
 import "fmt"
 
 type pengguna struct {
 	nama string
 	id   int
 }
+type Pengeluaran struct {
+	akomodasi    int
+	transportasi int
+	makanan      int
+	hiburan      int
+}
 
-const NMAX int = 10
+const PAX int = 10
 
-type tabPengguna [NMAX]pengguna
-type tabkategori [4]string
-type tabPengeluaran [4]int
+type tabPengeluaran [PAX]Pengeluaran
+type tabPengguna [PAX]pengguna
 
 func main() {
-	var pax, budget int
+	var pax, budget, opsi int
 	var arrayUser tabPengguna
-	var arrayKateogri tabkategori
 	var arrayPengeluaran tabPengeluaran
 
-	arrayKateogri = tabkategori{"akomodasi", "transportasi", "makanan", "hiburan"}
 	fmt.Printf("Masukkan Jumlah Pengguna : ")
 	fmt.Scan(&pax)
 	fmt.Printf("Masukkan Budget Perjalanan : ")
 	fmt.Scan(&budget)
 	inputData(&arrayUser, &pax)
-	tambahPengeluaran(arrayUser, &arrayKateogri, &arrayPengeluaran, pax)
+	for {
+		tampilanMenu()
+		fmt.Scan(&opsi)
+
+		switch opsi {
+		case 1:
+			tambahPengeluaran(arrayUser, &arrayPengeluaran, pax)
+
+		case 2:
+			editPengeluaran(arrayUser, arrayPengeluaran, pax)
+
+		case 3:
+			hapusPengeluaran(arrayUser, &arrayPengeluaran, pax)
+		case 4:
+			lihatSemua(arrayUser, arrayPengeluaran, pax)
+		case 7:
+			laporanAkhir(arrayUser, arrayPengeluaran, pax, budget)
+		}
+
+		if opsi == 8 {
+			fmt.Println("terimaksih ya!")
+			break
+		}
+
+	}
 
 }
-
 func inputData(A *tabPengguna, n *int) {
 	var i int
 
@@ -42,7 +65,6 @@ func inputData(A *tabPengguna, n *int) {
 		fmt.Scan(&A[i].id)
 	}
 }
-
 func tampilanMenu() {
 
 	fmt.Println("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█")
@@ -64,10 +86,10 @@ func tampilanMenu() {
 	fmt.Println("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█")
 	fmt.Println(" Tekan angka (1-8) lalu ENTER untuk memulai ")
 }
-
-func tambahPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) {
-	var i, j, IDUser int
+func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
+	var i, IDUser, jumlah int
 	var pilihan int
+	var kategori string
 
 	fmt.Println()
 	fmt.Println("Tambah Pengeluaran : ")
@@ -75,58 +97,69 @@ func tambahPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) 
 	fmt.Scan(&IDUser)
 	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ")
 	fmt.Scan(&pilihan)
+	fmt.Printf("Masukkan Jumlah Pengeluaran yang mau di tambah : ")
+	fmt.Scan(&jumlah)
 
-	i = 0
+	for i = 0; i < n; i++ {
+		if A[i].id == IDUser {
+			switch pilihan {
+			case 1:
+				C[i].akomodasi += jumlah
+				kategori = "akomodasi"
+			case 2:
+				C[i].transportasi += jumlah
+				kategori = "transportasi"
+			case 3:
+				C[i].makanan += jumlah
+				kategori = "makanan"
+			case 4:
+				C[i].hiburan += jumlah
+				kategori = "hiburan"
+			default:
+				fmt.Println("Kategori tidak valid!")
+				return
+			}
+			fmt.Printf("Berhasil mencatat untuk %s di kategori %s\n", A[i].nama, kategori)
+			return
+		}
+	}
+	fmt.Println("ID tidak ditemukan.")
+}
+func editPengeluaran(A tabPengguna, B tabPengeluaran, n int) {
+
+	var id, pilihan, jumlah, IDUser, i int
+	fmt.Print("Masukkan ID pengguna: ")
+	fmt.Scan(&id)
 
 	for i < n && IDUser != A[i].id {
 		i++
 	}
 
-	j = pilihan - 1
-
-	if j >= 0 && j < 4 && i < n {
-		fmt.Printf("Berhasil mencatat untuk %s di kategori %s\n", A[i].nama, (*B)[j])
-	} else {
-		fmt.Println("Input tidak valid!")
-	}
-
-	fmt.Printf("Masukkan pengeluaran pada kategori %s : ", (*B)[j])
-	fmt.Scan(&(*C)[j])
-	fmt.Println(*C)
-
-}
-
-func editPengeluaran(pax int) {
-	var id, pilihan, jumlah int
-	fmt.Print("Masukkan ID pengguna: ")
-	fmt.Scan(&id)
-	if id < 0 || id >= pax {
-		fmt.Println("ID tidak valid.")
-		return
-	}
 	fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
 	fmt.Print("Masukkan kategori: ")
 	fmt.Scan(&pilihan)
 	fmt.Print("Masukkan nilai baru: ")
-	fmt.Scan(&j)
+	fmt.Scan(&jumlah)
 
 	switch pilihan {
 	case 1:
-		akomodasi[id] = j // akomodasi[id] + j ( BISA DI BUAT KAYA GINI JUGA )
+		B[pilihan-1].akomodasi = jumlah // akomodasi[id] + j ( BISA DI BUAT KAYA GINI JUGA )
 	case 2:
-		transportasi[id] = j // transportasi[id] + j
+		B[pilihan-1].transportasi = jumlah // transportasi[id] + j
 	case 3:
-		makanan[id] = j // makanan[id] = makanan[id] + j
+		B[pilihan-1].makanan = jumlah // makanan[id] = makanan[id] + j
 	case 4:
-		hiburan[id] = j // hiburan[id] = hiburan[id] + j
+		B[pilihan-1].hiburan = jumlah // hiburan[id] = hiburan[id] + j
 	default:
 		fmt.Println("Kategori tidak valid.")
 	}
 }
 
-func hapusPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) {
-	var i, j, IDUser int
+func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
+	var i, IDUser int // j int
 	var pilihan int
+	// var found bool = false
+	var kategori string
 
 	fmt.Println()
 	fmt.Println("Hapus Pengeluaran : ")
@@ -135,34 +168,56 @@ func hapusPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) {
 	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ")
 	fmt.Scan(&pilihan)
 
-	i = 0
-
-	for i < n && IDUser != A[i].id {
-		i++
+	for i = 0; i < n; i++ {
+		if A[i].id == IDUser {
+			switch pilihan {
+			case 1:
+				C[i].akomodasi = 0
+				kategori = "akomodasi"
+			case 2:
+				C[i].transportasi = 0
+				kategori = "transportasi"
+			case 3:
+				C[i].makanan = 0
+				kategori = "makanan"
+			case 4:
+				C[i].hiburan = 0
+				kategori = "hiburan"
+			default:
+				fmt.Println("Kategori tidak valid!")
+				return
+			}
+			fmt.Printf("Berhasil menghapus untuk %s di kategori %s\n", A[i].nama, kategori)
+			return
+		}
 	}
-
-	j = pilihan - 1
-
-	if j >= 0 && j < 4 && i < n {
-		fmt.Printf("Berhasil mencatat untuk %s di kategori %s\n", A[i].nama, (*B)[j])
-	} else {
-		fmt.Println("Input tidak valid!")
-	}
-
-	(*C)[j] = 0
-	fmt.Printf("Berhasil menghapus pengeluaran pada %s ", (*B)[j])
-	fmt.Println(*C)
-
 }
-func lihatSemua(n int) {
+func lihatSemua(A tabPengguna, B tabPengeluaran, n int) {
 	fmt.Println("╔════════╦════════════════╦════════════╦══════════════╦══════════╦══════════╗")
 	fmt.Println("║   ID   ║      Nama      ║ Akomodasi  ║ Transportasi ║ Makanan  ║ Hiburan  ║")
 	fmt.Println("╠════════╬════════════════╬════════════╬══════════════╬══════════╬══════════╣")
 
 	for i := 0; i < n; i++ {
 		fmt.Printf("║  %-4d ║ %-14s ║ %-10d ║ %-12d ║ %-8d ║ %-8d ║\n",
-			i, pengguna[i], akomodasi[i], transportasi[i], makanan[i], hiburan[i])
+			A[i].id, A[i].nama, B[i].akomodasi, B[i].transportasi, B[i].makanan, B[i].hiburan)
 	}
 
 	fmt.Println("╚════════╩════════════════╩════════════╩══════════════╩══════════╩══════════╝")
+}
+func laporanAkhir(A tabPengguna, B tabPengeluaran, pax int, budget int) {
+	fmt.Println("\n═══════════════════════════════════════════════════════════════════════")
+	fmt.Println("                            LAPORAN AKHIR")
+	fmt.Println("═══════════════════════════════════════════════════════════════════════")
+	fmt.Printf("╔════╦════════════════╦════════════════════╦════════════╦════════════╗\n")
+	fmt.Printf("║ ID ║ Nama           ║ Total Pengeluaran  ║ Budget     ║ Selisih    ║\n")
+	fmt.Printf("╠════╬════════════════╬════════════════════╬════════════╬════════════╣\n")
+
+	for i := 0; i < pax; i++ {
+		total := B[i].akomodasi + B[i].transportasi + B[i].makanan + B[i].hiburan
+		selisih := budget - total
+		fmt.Printf("║ %-2d ║ %-14s ║ %-18d ║ %-10d ║ %-10d ║\n",
+			A[i].id, A[i].nama, total, budget, selisih)
+	}
+
+	fmt.Printf("╚════╩════════════════╩════════════════════╩════════════╩════════════╝\n")
 }

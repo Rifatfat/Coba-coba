@@ -1,3 +1,7 @@
+package main 
+func main () {
+
+}
 package main
 
 import "fmt"
@@ -151,5 +155,3 @@ func hapusPengeluaran(A tabPengguna, B *tabkategori, C *tabPengeluaran, n int) {
 	fmt.Println(*C)
 
 }
-
-// KURANG INI PENAMAAN VARIABEL KURANG MIX N MATCH WKWKWKKWWK

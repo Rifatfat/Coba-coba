@@ -154,7 +154,6 @@ func editPengeluaran(A tabPengguna, B tabPengeluaran, n int) {
 		fmt.Println("Kategori tidak valid.")
 	}
 }
-
 func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	var i, IDUser int // j int
 	var pilihan int

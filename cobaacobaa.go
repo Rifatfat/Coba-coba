@@ -166,3 +166,36 @@ func lihatSemua(n int) {
 
 	fmt.Println("╚════════╩════════════════╩════════════╩══════════════╩══════════╩══════════╝")
 }
+
+
+func laporanAkhir(A tabPengguna, B tabkategori, C tabPengeluaran, n int, budget int) {
+	fmt.Println("╔════════╦════════════╦════════════╦════════════════╦════════════╗")
+	fmt.Println("║  ID    ║   Nama     ║  Kategori  ║  Pengeluaran   ║  Selisih   ║")
+	fmt.Println("╠════════╬════════════╬════════════╬════════════════╬════════════╣")
+
+	for i := 0; i < n; i++ {
+		total := 0
+		for j := 0; j < 4; j++ {
+			
+			if j == 0 {
+				fmt.Printf("║ %-6d ║ %-10s ║ %-10s ║ Rp %10d ║ %-10s ║\n",
+					A[i].id, A[i].nama, B[j], C[i][j], "")
+			} else {
+				
+				fmt.Printf("║ %-6s ║ %-10s ║ %-10s ║ Rp %10d ║ %-10s ║\n",
+					"", "", B[j], C[i][j], "")
+			}
+			total += C[i][j]
+		}
+		
+		selisih := budget - total
+		fmt.Printf("║ %-6s ║ %-10s ║ %-10s ║ %-14s ║ Rp %-8d ║\n",
+			"", "", "", "", selisih)
+		
+		if i < n-1 {
+			fmt.Println("╠════════╬════════════╬════════════╬════════════════╬════════════╣")
+		} else {
+			fmt.Println("╚════════╩════════════╩════════════╩════════════════╩════════════╝")
+		}
+	}
+}

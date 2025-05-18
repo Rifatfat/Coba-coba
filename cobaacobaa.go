@@ -191,3 +191,57 @@ func lihatSemua(A tabPengguna, B tabPengeluaran, n int) {
 
 	fmt.Println("╚════════╩════════════════╩════════════╩══════════════╩══════════╩══════════╝")
 }
+func laporanAkhir(A tabPengguna, B tabPengeluaran, pax int, budget int) {
+	fmt.Println("\n═══════════════════════════════════════════════════════════════════════")
+	fmt.Println("                            LAPORAN AKHIR")
+	fmt.Println("═══════════════════════════════════════════════════════════════════════")
+	fmt.Printf("╔════╦════════════════╦════════════════════╦════════════╦════════════╗\n")
+	fmt.Printf("║ ID ║ Nama           ║ Total Pengeluaran  ║ Budget     ║ Selisih    ║\n")
+	fmt.Printf("╠════╬════════════════╬════════════════════╬════════════╬════════════╣\n")
+
+	for i := 0; i < pax; i++ {
+		total := B[i].akomodasi + B[i].transportasi + B[i].makanan + B[i].hiburan
+		selisih := budget - total
+		fmt.Printf("║ %-2d ║ %-14s ║ %-18d ║ %-10d ║ %-10d ║\n",
+			A[i].id, A[i].nama, total, budget, selisih)
+	}
+
+	fmt.Printf("╚════╩════════════════╩════════════════════╩════════════╩════════════╝\n")
+}
+func cariPengeluaranSeq(A tabPengguna, B tabPengeluaran, n int) {
+	var i int
+	maxPengeluaran := 0
+	var maxakomodasi, maxtransportasi, maxmakanan, maxhiburan int
+	namaA := ""
+
+	for i = 0; i < n; i++ {
+		if B[i].akomodasi > maxPengeluaran {
+			maxakomodasi = B[i].akomodasi
+			namaA = A[i].nama // Simpan nama yang sesuai dengan nilai maks
+		}
+	}
+	fmt.Printf("Pengeluaran terbanyak pada kategori akomodasi sebesar %d oleh %s\n", maxakomodasi, namaA)
+
+	for i = 0; i < n; i++ {
+		if B[i].transportasi > maxPengeluaran {
+			maxtransportasi = B[i].transportasi
+			namaA = A[i].nama
+		}
+	}
+	fmt.Printf("Pengeluaran terbanyak pada kategori transportasi sebesar %d oleh %s\n", maxtransportasi, namaA)
+	for i = 0; i < n; i++ {
+		if B[i].makanan > maxPengeluaran {
+			maxmakanan = B[i].makanan
+			namaA = A[i].nama
+		}
+	}
+	fmt.Printf("Pengeluaran terbanyak pada kategori makanan sebesar %d oleh %s\n", maxmakanan, namaA)
+
+	for i = 0; i < n; i++ {
+		if B[i].hiburan > maxPengeluaran {
+			maxhiburan = B[i].hiburan
+			namaA = A[i].nama
+		}
+	}
+	fmt.Printf("Pengeluaran terbanyak pada kategori hiburan sebesar %d oleh %s\n", maxhiburan, namaA)
+}

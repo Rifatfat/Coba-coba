@@ -114,3 +114,80 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	}
 	fmt.Println("ID tidak ditemukan.")
 }
+func editPengeluaran(A tabPengguna, B tabPengeluaran, n int) {
+
+	var id, pilihan, jumlah, IDUser, i int
+	fmt.Print("Masukkan ID pengguna: ")
+	fmt.Scan(&id)
+
+	for i < n && IDUser != A[i].id {
+		i++
+	}
+
+	fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
+	fmt.Print("Masukkan kategori: ")
+	fmt.Scan(&pilihan)
+	fmt.Print("Masukkan nilai baru: ")
+	fmt.Scan(&jumlah)
+
+	switch pilihan {
+	case 1:
+		B[pilihan-1].akomodasi = jumlah
+	case 2:
+		B[pilihan-1].transportasi = jumlah
+	case 3:
+		B[pilihan-1].makanan = jumlah
+	case 4:
+		B[pilihan-1].hiburan = jumlah
+	default:
+		fmt.Println("Kategori tidak valid.")
+	}
+}
+func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
+	var i, IDUser int // j int
+	var pilihan int
+	// var found bool = false
+	var kategori string
+
+	fmt.Println()
+	fmt.Println("Hapus Pengeluaran : ")
+	fmt.Printf("Masukkan ID : ")
+	fmt.Scan(&IDUser)
+	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ")
+	fmt.Scan(&pilihan)
+	for i = 0; i < n; i++ {
+		if A[i].id == IDUser {
+			switch pilihan {
+			case 1:
+				C[i].akomodasi = 0
+				kategori = "akomodasi"
+			case 2:
+				C[i].transportasi = 0
+				kategori = "transportasi"
+			case 3:
+				C[i].makanan = 0
+				kategori = "makanan"
+			case 4:
+				C[i].hiburan = 0
+				kategori = "hiburan"
+			default:
+				fmt.Println("Kategori tidak valid!")
+				return
+			}
+			fmt.Printf("Berhasil menghapus untuk %s di kategori %s\n", A[i].nama, kategori)
+			return
+		}
+	}
+}
+func lihatSemua(A tabPengguna, B tabPengeluaran, n int) {
+	fmt.Println("╔════════╦════════════════╦════════════╦══════════════╦══════════╦══════════╗")
+	fmt.Println("║   ID   ║      Nama      ║ Akomodasi  ║ Transportasi ║ Makanan  ║ Hiburan  ║")
+	fmt.Println("╠════════╬════════════════╬════════════╬══════════════╬══════════╬══════════╣")
+
+	for i := 0; i < n; i++ {
+		fmt.Printf("║  %-4d ║ %-14s ║ %-10d ║ %-12d ║ %-8d ║ %-8d ║\n",
+			A[i].id, A[i].nama, B[i].akomodasi, B[i].transportasi, B[i].makanan, B[i].hiburan)
+	}
+
+	fmt.Println("╚════════╩════════════════╩════════════╩══════════════╩══════════╩══════════╝")
+}

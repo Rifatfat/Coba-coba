@@ -55,3 +55,62 @@ func main() {
 	}
 
 }
+func tampilanMenu() {
+
+	fmt.Println("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█")
+	fmt.Println("█                      G O   B U D G E T                      █")
+	fmt.Println("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█")
+	fmt.Println("             SELAMAT DATANG DI APLIKASI GO BUDGET             ")
+	fmt.Println("               Aplikasi Pencatatan Keuangan Anda              ")
+	fmt.Println("▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀")
+	fmt.Println("█                                                             █")
+	fmt.Println("█    ➤  1. Tambah Pengeluaran                                █")
+	fmt.Println("█    ➤  2. Ubah Pengeluaran                                  █")
+	fmt.Println("█    ➤  3. Hapus Pengeluaran                                 █")
+	fmt.Println("█    ➤  4. Lihat Semua Pengeluaran                           █")
+	fmt.Println("█    ➤  5. Cari Pengeluaran                                  █")
+	fmt.Println("█    ➤  6. Urutkan Pengeluaran                               █")
+	fmt.Println("█    ➤  7. Laporan Akhir                                     █")
+	fmt.Println("█    ➤  8. Exit                                              █")
+	fmt.Println("█                                                             █")
+	fmt.Println("█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█")
+	fmt.Println(" Tekan angka (1-8) lalu ENTER untuk memulai ")
+}
+func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
+	var i, IDUser, jumlah int
+	var pilihan int
+	var kategori string
+
+	fmt.Println()
+	fmt.Println("Tambah Pengeluaran : ")
+	fmt.Printf("Masukkan ID : ")
+	fmt.Scan(&IDUser)
+	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ")
+	fmt.Scan(&pilihan)
+	fmt.Printf("Masukkan Jumlah Pengeluaran yang mau di tambah : ")
+	fmt.Scan(&jumlah)
+	for i = 0; i < n; i++ {
+		if A[i].id == IDUser {
+			switch pilihan {
+			case 1:
+				C[i].akomodasi += jumlah
+				kategori = "akomodasi"
+			case 2:
+				C[i].transportasi += jumlah
+				kategori = "transportasi"
+			case 3:
+				C[i].makanan += jumlah
+				kategori = "makanan"
+			case 4:
+				C[i].hiburan += jumlah
+				kategori = "hiburan"
+			default:
+				fmt.Println("Kategori tidak valid!")
+				return
+			}
+			fmt.Printf("Berhasil mencatat untuk %s di kategori %s\n", A[i].nama, kategori)
+			return
+		}
+	}
+	fmt.Println("ID tidak ditemukan.")
+}

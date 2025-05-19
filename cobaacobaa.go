@@ -55,6 +55,16 @@ func main() {
 	}
 
 }
+func inputData(A *tabPengguna, n *int) {
+	var i int
+
+	for i = 0; i <= *n-1; i++ {
+		fmt.Printf("Masukkan Nama Pengguna : ")
+		fmt.Scan(&A[i].nama)
+		fmt.Printf("Masukkan ID Pengguna : ")
+		fmt.Scan(&A[i].id)
+	}
+}
 func tampilanMenu() {
 
 	fmt.Println("█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█")
@@ -116,33 +126,52 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 }
 func editPengeluaran(A tabPengguna, B tabPengeluaran, n int) {
 
-	var id, pilihan, jumlah, IDUser, i int
+	var pilihan, jumlah, IDUser, i int
 	fmt.Print("Masukkan ID pengguna: ")
-	fmt.Scan(&id)
+	fmt.Scan(&IDUser) // unik id
+	i = 0
+	for IDUser == A[i].id {
+		fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
+		fmt.Print("Masukkan kategori: ")
+		fmt.Scan(&pilihan)
+		fmt.Print("Masukkan nilai baru: ")
+		fmt.Scan(&jumlah)
 
-	for i < n && IDUser != A[i].id {
+		switch pilihan {
+		case 1:
+			B[pilihan-1].akomodasi = jumlah
+		case 2:
+			B[pilihan-1].transportasi = jumlah
+		case 3:
+			B[pilihan-1].makanan = jumlah
+		case 4:
+			B[pilihan-1].hiburan = jumlah
+		default:
+			fmt.Println("Kategori tidak valid.")
+		}
 		i++
 	}
-
-	fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
-	fmt.Print("Masukkan kategori: ")
-	fmt.Scan(&pilihan)
-	fmt.Print("Masukkan nilai baru: ")
-	fmt.Scan(&jumlah)
-
-	switch pilihan {
-	case 1:
-		B[pilihan-1].akomodasi = jumlah
-	case 2:
-		B[pilihan-1].transportasi = jumlah
-	case 3:
-		B[pilihan-1].makanan = jumlah
-	case 4:
-		B[pilihan-1].hiburan = jumlah
-	default:
-		fmt.Println("Kategori tidak valid.")
-	}
 }
+
+//		fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
+//		fmt.Print("Masukkan kategori: ")
+//		fmt.Scan(&pilihan)
+//		fmt.Print("Masukkan nilai baru: ")
+//		fmt.Scan(&jumlah)
+//
+//		switch pilihan {
+//		case 1:
+//			B[pilihan-1].akomodasi = jumlah
+//		case 2:
+//			B[pilihan-1].transportasi = jumlah
+//		case 3:
+//			B[pilihan-1].makanan = jumlah
+//		case 4:
+//			B[pilihan-1].hiburan = jumlah
+//		default:
+//			fmt.Println("Kategori tidak valid.")
+//		}
+//	}
 func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	var i, IDUser int // j int
 	var pilihan int

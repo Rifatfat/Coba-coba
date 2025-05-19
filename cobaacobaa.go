@@ -210,9 +210,9 @@ func laporanAkhir(A tabPengguna, B tabPengeluaran, pax int, budget int) {
 }
 func cariPengeluaranSeq(A tabPengguna, B tabPengeluaran, n int) {
 	var i int
-	maxPengeluaran := 0
 	var maxakomodasi, maxtransportasi, maxmakanan, maxhiburan int
 	namaA := ""
+	maxPengeluaran := 0
 
 	for i = 0; i < n; i++ {
 		if B[i].akomodasi > maxPengeluaran {

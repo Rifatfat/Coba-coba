@@ -94,7 +94,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	var kategori string
 
 	fmt.Println()
-	fmt.Println("Tambah Pengeluaran : ")
+	fmt.Println(" Tambah Pengeluaran ")
 	fmt.Printf("Masukkan ID : ")
 	fmt.Scan(&IDUser)
 	fmt.Println("╔════╦══════════════════╗")
@@ -105,11 +105,10 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	fmt.Println("║ 3  ║ Makanan           ║")
 	fmt.Println("║ 4  ║ Hiburan           ║")
 	fmt.Println("╚════╩══════════════════╝")
-	fmt.Print("Masukkan kategori (1-4): ")
+	fmt.Printf("Masukkan kategori (1-4): ")
 	// buat rapih DONE
 	fmt.Scan(&pilihan)
-	//fmt.Printf("Masukkan Jumlah Pengeluaran yang mau di tambah : ")
-	//fmt.Scan(&jumlah)
+
 	for i = 0; i < n; i++ {
 		if A[i].id == IDUser {
 			switch pilihan {
@@ -124,7 +123,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 				fmt.Println("║ 3. Hotel Bintang 5  (Rp800.000/mlm) ║")
 				fmt.Println("╚══════════════════════════════════════╝")
 
-				fmt.Println("Masukan Pilihan : ")
+				fmt.Printf("Masukan Pilihan : ")
 				fmt.Scan(&hotelPilihan)
 
 				switch hotelPilihan {
@@ -165,7 +164,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 				fmt.Println("║ 8  ║ Thailand           ║ Rp3.500.000          ║")
 				fmt.Println("╚════╩════════════════════╩══════════════════════╝")
 				// disini print negara tujuan dan harga nya (buat jadi rapih kotak kotak) -> DONE
-				fmt.Println("Masukkan nomor negara tujuan: ")
+				fmt.Printf("Masukkan nomor negara tujuan: ")
 				fmt.Scan(&negara)
 				switch negara {
 				case 1:
@@ -187,24 +186,21 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 					kategori = "transportasi ke Thailand"
 				default:
 					fmt.Println("Negara belum terdaftar, masukkan biaya manual.")
-					fmt.Println("Masukkan nama negara: ")
+					fmt.Printf("Masukkan nama negara: ")
 					fmt.Scan(&negaraBaru)
 					fmt.Print("Masukkan biaya tiket :")
 					fmt.Scan(&hargaTiket)
 				}
 
 				C[i].transportasi += hargaTiket
-				// kategori = "transportasi ke " + negara
 
-				//C[i].transportasi += jumlah
-				//kategori = "transportasi"
 			case 3:
-				fmt.Println("Masukan jumlah : ")
+				fmt.Printf("Masukan jumlah : ")
 				fmt.Scan(&jumlah)
 				C[i].makanan += jumlah
 				kategori = "makanan"
 			case 4:
-				fmt.Println("Masukan jumlah : ")
+				fmt.Printf("Masukan jumlah : ")
 				fmt.Scan(&jumlah)
 				C[i].hiburan += jumlah
 				kategori = "hiburan"
@@ -221,25 +217,6 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 func editPengeluaran(A tabPengguna, B tabPengeluaran, n int) {
 }
 
-//		fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
-//		fmt.Print("Masukkan kategori: ")
-//		fmt.Scan(&pilihan)
-//		fmt.Print("Masukkan nilai baru: ")
-//		fmt.Scan(&jumlah)
-//
-//		switch pilihan {
-//		case 1:
-//			B[pilihan-1].akomodasi = jumlah
-//		case 2:
-//			B[pilihan-1].transportasi = jumlah
-//		case 3:
-//			B[pilihan-1].makanan = jumlah
-//		case 4:
-//			B[pilihan-1].hiburan = jumlah
-//		default:
-//			fmt.Println("Kategori tidak valid.")
-//		}
-//	}
 func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 }
 func lihatSemua(A tabPengguna, B tabPengeluaran, n int) {
@@ -274,8 +251,6 @@ func laporanAkhir(A tabPengguna, B tabPengeluaran, pax int, budget int) {
 func cariPengeluaranSeq(A tabPengguna, B tabPengeluaran, n int) { // kalo pengeuarannya sama bagaimana ?
 	var i int
 	var maxakomodasi, maxtransportasi, maxmakanan, maxhiburan int
-	//namaA := ""
-	//maxPengeluaran := 0
 
 	for i = 0; i < n-1; i++ {
 		if B[i].akomodasi > B[i+1].akomodasi {

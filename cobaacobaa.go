@@ -97,7 +97,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	fmt.Println("Tambah Pengeluaran : ")
 	fmt.Printf("Masukkan ID : ")
 	fmt.Scan(&IDUser)
-	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ")
+	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ") // buat rapih
 	fmt.Scan(&pilihan)
 	//fmt.Printf("Masukkan Jumlah Pengeluaran yang mau di tambah : ")
 	//fmt.Scan(&jumlah)
@@ -105,7 +105,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 		if A[i].id == IDUser {
 			switch pilihan {
 			case 1:
-				fmt.Println("Pilih Hotel:")
+				fmt.Println("Pilih Hotel:") // buat jadi rapih kotak kotak
 				fmt.Println("1. Hotel Bintang 3 (Rp300.000/malam)")
 				fmt.Println("2. Hotel Bintang 4 (Rp500.000/malam)")
 				fmt.Println("3. Hotel Bintang 5 (Rp800.000/malam)")
@@ -139,7 +139,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 			case 2:
 				var hargaTiket int
 				var negara string
-
+				// disini print negara tujuan dan harga nya (buat jadi rapih kotak kotak)
 				fmt.Scan(&negara)
 				switch negara {
 				case "singapore", "Singapore":
@@ -174,7 +174,7 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 				fmt.Println("Kategori tidak valid!")
 				return
 			}
-			fmt.Printf("Berhasil mencatat untuk %s di kategori %s\n", A[i].nama, kategori)
+			fmt.Printf("Berhasil mencatat untuk %s di kategori %s\n", A[i].nama, kategori) // kalo bisa dia tau saldo yang di input di budget
 			return
 		}
 	}
@@ -235,10 +235,10 @@ func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	var kategori string
 
 	fmt.Println()
-	fmt.Println("Hapus Pengeluaran : ")
+	fmt.Println("Hapus Pengeluaran ") // ubah tampilan jadi kotak kotak dan rapih
 	fmt.Printf("Masukkan ID : ")
 	fmt.Scan(&IDUser)
-	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ")
+	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ") // ubah jadi kotak kotak
 	fmt.Scan(&pilihan)
 	for i = 0; i < n; i++ {
 		if A[i].id == IDUser {
@@ -265,7 +265,7 @@ func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	}
 }
 func lihatSemua(A tabPengguna, B tabPengeluaran, n int) {
-	fmt.Println("╔════════╦════════════════╦════════════╦══════════════╦══════════╦══════════╗")
+	fmt.Println("╔════════╦════════════════╦════════════╦══════════════╦══════════╦══════════╗") // rekomendasi itu mau di taro di mana ?
 	fmt.Println("║   ID   ║      Nama      ║ Akomodasi  ║ Transportasi ║ Makanan  ║ Hiburan  ║")
 	fmt.Println("╠════════╬════════════════╬════════════╬══════════════╬══════════╬══════════╣")
 
@@ -293,44 +293,84 @@ func laporanAkhir(A tabPengguna, B tabPengeluaran, pax int, budget int) {
 
 	fmt.Printf("╚════╩════════════════╩════════════════════╩════════════╩════════════╝\n")
 }
-func cariPengeluaranSeq(A tabPengguna, B tabPengeluaran, n int) {
+func cariPengeluaranSeq(A tabPengguna, B tabPengeluaran, n int) { // kalo pengeuarannya sama bagaimana ?
 	var i int
 	var maxakomodasi, maxtransportasi, maxmakanan, maxhiburan int
-	namaA := ""
+	//namaA := ""
 	//maxPengeluaran := 0
 
-	for i = 0; i < n; i++ {
+	for i = 0; i < n-1; i++ {
 		if B[i].akomodasi > B[i+1].akomodasi {
 			maxakomodasi = B[i].akomodasi
-			namaA = A[i].nama // Simpan nama yang sesuai dengan nilai maks
+			//namaA = A[i].nama // Simpan nama yang sesuai dengan nilai maks
+		} else {
+			maxakomodasi = B[i+1].akomodasi
+			//namaA = A[i].nama
 		}
 	}
-	fmt.Printf("Pengeluaran terbanyak pada kategori akomodasi sebesar %d oleh %s\n", maxakomodasi, namaA)
 
-	for i = 0; i < n; i++ {
+	i = 0
+
+	for maxakomodasi != B[i].akomodasi {
+		i++
+	}
+
+	fmt.Printf("Pengeluaran terbanyak pada kategori akomodasi sebesar %d oleh %s\n", maxakomodasi, A[i].nama)
+	//----------------------------
+	for i = 0; i < n-1; i++ {
 		if B[i].transportasi > B[i+1].transportasi {
 			maxtransportasi = B[i].transportasi
-			namaA = A[i].nama
+			//namaA = A[i].nama
+		} else {
+			maxtransportasi = B[i+1].transportasi
+			//namaA = A[i].nama
 		}
 	}
-	fmt.Printf("Pengeluaran terbanyak pada kategori transportasi sebesar %d oleh %s\n", maxtransportasi, namaA)
-	for i = 0; i < n; i++ {
+
+	i = 0
+
+	for maxtransportasi != B[i].transportasi {
+		i++
+	}
+
+	fmt.Printf("Pengeluaran terbanyak pada kategori transportasi sebesar %d oleh %s\n", maxtransportasi, A[i].nama)
+	//------------------------------------
+	for i = 0; i < n-1; i++ {
 		if B[i].makanan > B[i+1].makanan {
 			maxmakanan = B[i].makanan
-			namaA = A[i].nama
+			//namaA = A[i].nama
+		} else {
+			maxmakanan = B[i+1].makanan
+			//namaA = A[i].nama
 		}
 	}
-	fmt.Printf("Pengeluaran terbanyak pada kategori makanan sebesar %d oleh %s\n", maxmakanan, namaA)
 
-	for i = 0; i < n; i++ {
+	i = 0
+
+	for maxmakanan != B[i].makanan {
+		i++
+	}
+
+	fmt.Printf("Pengeluaran terbanyak pada kategori makanan sebesar %d oleh %s\n", maxmakanan, A[i].nama)
+	//---------------------------------------
+	for i = 0; i < n-1; i++ {
 		if B[i].hiburan > B[i+1].hiburan {
 			maxhiburan = B[i].hiburan
-			namaA = A[i].nama
+			//namaA = A[i].nama
+		} else {
+			maxhiburan = B[i+1].hiburan
+			//namaA = A[i].nama
 		}
 	}
-	fmt.Printf("Pengeluaran terbanyak pada kategori hiburan sebesar %d oleh %s\n", maxhiburan, namaA)
-}
 
+	i = 0
+
+	for maxhiburan != B[i].hiburan {
+		i++
+	}
+
+	fmt.Printf("Pengeluaran terbanyak pada hiburan akomodasi sebesar %d oleh %s\n", maxhiburan, A[i].nama)
+}
 func urutkanPengeluaran(daftarPengguna *tabPengguna, daftarPengeluaran *tabPengeluaran, jumlahPengguna int) {
 	// binarry search
 	var i, j int

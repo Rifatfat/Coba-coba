@@ -404,3 +404,37 @@ func urutkanPengeluaran(daftarPengguna *tabPengguna, daftarPengeluaran *tabPenge
 	}
 	fmt.Println("╚════╩════════════════╩════════════════════╝")
 }
+
+func urutkanPengeluaran(daftarPengguna *tabPengguna, daftarPengeluaran *tabPengeluaran, jumlahPengguna int) {
+	// binarry search
+	var i, j int
+	var penggunaSementara pengguna
+	var pengeluaranSementara Pengeluaran
+
+	for i = 1; i < jumlahPengguna; i++ {
+		j = i
+		for j > 0 {
+			totalSekarang := daftarPengeluaran[j].akomodasi + daftarPengeluaran[j].transportasi + daftarPengeluaran[j].makanan + daftarPengeluaran[j].hiburan
+			totalSebelumnya := daftarPengeluaran[j-1].akomodasi + daftarPengeluaran[j-1].transportasi + daftarPengeluaran[j-1].makanan + daftarPengeluaran[j-1].hiburan
+
+			if totalSekarang < totalSebelumnya {
+				penggunaSementara = daftarPengguna[j]
+				daftarPengguna[j] = daftarPengguna[j-1]
+				daftarPengguna[j-1] = penggunaSementara
+
+				pengeluaranSementara = daftarPengeluaran[j]
+				daftarPengeluaran[j] = daftarPengeluaran[j-1]
+				daftarPengeluaran[j-1] = pengeluaranSementara
+			}
+			j--
+		}
+	}
+	fmt.Println("\n╔════╦════════════════╦════════════════════╗")
+	fmt.Println("║ ID ║ Nama           ║ Total Pengeluaran  ║")
+	fmt.Println("╠════╬════════════════╬════════════════════╣")
+	for i = 0; i < jumlahPengguna; i++ {
+		total := daftarPengeluaran[i].akomodasi + daftarPengeluaran[i].transportasi + daftarPengeluaran[i].makanan + daftarPengeluaran[i].hiburan
+		fmt.Printf("║ %-2d ║ %-14s ║ %-18d ║\n", daftarPengguna[i].id, daftarPengguna[i].nama, total)
+	}
+	fmt.Println("╚════╩════════════════╩════════════════════╝")
+}

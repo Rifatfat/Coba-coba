@@ -97,7 +97,16 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	fmt.Println("Tambah Pengeluaran : ")
 	fmt.Printf("Masukkan ID : ")
 	fmt.Scan(&IDUser)
-	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ") // buat rapih
+	fmt.Println("╔════╦══════════════════╗")
+	fmt.Println("║ No ║     Kategori      ║")
+	fmt.Println("╠════╬══════════════════╣")
+	fmt.Println("║ 1  ║ Akomodasi         ║")
+	fmt.Println("║ 2  ║ Transportasi      ║")
+	fmt.Println("║ 3  ║ Makanan           ║")
+	fmt.Println("║ 4  ║ Hiburan           ║")
+	fmt.Println("╚════╩══════════════════╝")
+	fmt.Print("Masukkan kategori (1-4): ")
+	// buat rapih DONE
 	fmt.Scan(&pilihan)
 	//fmt.Printf("Masukkan Jumlah Pengeluaran yang mau di tambah : ")
 	//fmt.Scan(&jumlah)
@@ -105,12 +114,16 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 		if A[i].id == IDUser {
 			switch pilihan {
 			case 1:
-				fmt.Println("Pilih Hotel:") // buat jadi rapih kotak kotak
-				fmt.Println("1. Hotel Bintang 3 (Rp300.000/malam)")
-				fmt.Println("2. Hotel Bintang 4 (Rp500.000/malam)")
-				fmt.Println("3. Hotel Bintang 5 (Rp800.000/malam)")
 				var hotelPilihan int
 				var harga int
+				fmt.Println("╔══════════════════════════════════════╗")
+				fmt.Println("║              Pilih Hotel            ║")
+				fmt.Println("╠══════════════════════════════════════╣")
+				fmt.Println("║ 1. Hotel Bintang 3  (Rp300.000/mlm) ║")
+				fmt.Println("║ 2. Hotel Bintang 4  (Rp500.000/mlm) ║")
+				fmt.Println("║ 3. Hotel Bintang 5  (Rp800.000/mlm) ║")
+				fmt.Println("╚══════════════════════════════════════╝")
+
 				fmt.Println("Masukan Pilihan : ")
 				fmt.Scan(&hotelPilihan)
 
@@ -138,26 +151,51 @@ func tambahPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 				//kategori = "akomodasi"
 			case 2:
 				var hargaTiket int
-				var negara string
-				// disini print negara tujuan dan harga nya (buat jadi rapih kotak kotak)
+				var negara, negaraBaru int
+				fmt.Println("╔════╦════════════════════╦══════════════════════╗")
+				fmt.Println("║ No ║   Negara Tujuan    ║     Harga Tiket      ║")
+				fmt.Println("╠════╬════════════════════╬══════════════════════╣")
+				fmt.Println("║ 1  ║ Belanda            ║ Rp10.800.000         ║")
+				fmt.Println("║ 2  ║ Italia             ║ Rp11.500.000         ║")
+				fmt.Println("║ 3  ║ Jepang             ║ Rp7.000.000          ║")
+				fmt.Println("║ 4  ║ Jerman             ║ Rp11.000.000         ║")
+				fmt.Println("║ 5  ║ Korea              ║ Rp6.500.000          ║")
+				fmt.Println("║ 6  ║ Prancis            ║ Rp12.000.000         ║")
+				fmt.Println("║ 7  ║ Spanyol            ║ Rp10.500.000         ║")
+				fmt.Println("║ 8  ║ Thailand           ║ Rp3.500.000          ║")
+				fmt.Println("╚════╩════════════════════╩══════════════════════╝")
+				// disini print negara tujuan dan harga nya (buat jadi rapih kotak kotak) -> DONE
+				fmt.Println("Masukkan nomor negara tujuan: ")
 				fmt.Scan(&negara)
 				switch negara {
-				case "singapore", "Singapore":
-					hargaTiket = 1000000
-				case "jepang", "Jepang":
+				case 1:
+					hargaTiket = 10800000
+				case 2:
+					hargaTiket = 11500000
+				case 3:
 					hargaTiket = 7000000
-				case "korea", "Korea":
+				case 4:
+					hargaTiket = 11000000
+				case 5:
 					hargaTiket = 6500000
-				case "thailand", "Thailand":
+				case 6:
+					hargaTiket = 12000000
+				case 7:
+					hargaTiket = 10500000
+				case 8:
 					hargaTiket = 3500000
+					kategori = "transportasi ke Thailand"
 				default:
 					fmt.Println("Negara belum terdaftar, masukkan biaya manual.")
-					fmt.Printf("Masukkan biaya tiket ke %s: ", negara)
+					fmt.Println("Masukkan nama negara: ")
+					fmt.Scan(&negaraBaru)
+					fmt.Print("Masukkan biaya tiket :")
 					fmt.Scan(&hargaTiket)
 				}
 
 				C[i].transportasi += hargaTiket
-				kategori = "transportasi ke " + negara
+				// kategori = "transportasi ke " + negara
+
 				//C[i].transportasi += jumlah
 				//kategori = "transportasi"
 			case 3:
@@ -187,8 +225,15 @@ func editPengeluaran(A tabPengguna, B tabPengeluaran, n int) {
 	fmt.Scan(&IDUser) // unik id
 	i = 0
 	for IDUser == A[i].id {
-		fmt.Println("Kategori yang ingin diedit: 1. Akomodasi 2. Transportasi 3. Makanan 4. Hiburan")
-		fmt.Print("Masukkan kategori: ")
+		fmt.Println("╔════╦══════════════════╗")
+		fmt.Println("║ No ║     Kategori      ║")
+		fmt.Println("╠════╬══════════════════╣")
+		fmt.Println("║ 1  ║ Akomodasi         ║")
+		fmt.Println("║ 2  ║ Transportasi      ║")
+		fmt.Println("║ 3  ║ Makanan           ║")
+		fmt.Println("║ 4  ║ Hiburan           ║")
+		fmt.Println("╚════╩══════════════════╝")
+		fmt.Print("Masukkan kategori (1-4): ")
 		fmt.Scan(&pilihan)
 		fmt.Print("Masukkan nilai baru: ")
 		fmt.Scan(&jumlah)
@@ -238,7 +283,15 @@ func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) {
 	fmt.Println("Hapus Pengeluaran ") // ubah tampilan jadi kotak kotak dan rapih
 	fmt.Printf("Masukkan ID : ")
 	fmt.Scan(&IDUser)
-	fmt.Printf("Masukkan Kategori : (1. Akomodasi, 2. Transportasi, 3. Makanan, 4. Hiburan) : ") // ubah jadi kotak kotak
+	fmt.Println("╔════╦══════════════════╗")
+	fmt.Println("║ No ║     Kategori      ║")
+	fmt.Println("╠════╬══════════════════╣")
+	fmt.Println("║ 1  ║ Akomodasi         ║")
+	fmt.Println("║ 2  ║ Transportasi      ║")
+	fmt.Println("║ 3  ║ Makanan           ║")
+	fmt.Println("║ 4  ║ Hiburan           ║")
+	fmt.Println("╚════╩══════════════════╝")
+	fmt.Print("Masukkan kategori (1-4): ") // ubah jadi kotak kotak -> DONE
 	fmt.Scan(&pilihan)
 	for i = 0; i < n; i++ {
 		if A[i].id == IDUser {

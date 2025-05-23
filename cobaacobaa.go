@@ -49,7 +49,7 @@ func main() {
 		case 7:
 			laporanAkhir(arrayUser, arrayPengeluaran, pax, budget)
 		}
-		if opsi == 8 {
+		if opsi >= 8 || opsi < 1 {
 			fmt.Println("terimaksih ya!")
 			break
 		}
@@ -276,12 +276,44 @@ func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) { // sudah rapih
 	fmt.Scan(&IDUser)
 
 	if A[i].id == IDUser { // sudah ada batasan jika salah input
-		fmt.Scan(&pilihan) //
-
+		fmt.Scan(&pilihan)      //
+		for i = 0; i < n; i++ { //
+			if A[i].id == IDUser {
+				fmt.Println("╔════╦══════════════════╗")
+				fmt.Println("║ No ║     Kategori      ║")
+				fmt.Println("╠════╬══════════════════╣")
+				fmt.Println("║ 1  ║ Akomodasi         ║")
+				fmt.Println("║ 2  ║ Transportasi      ║")
+				fmt.Println("║ 3  ║ Makanan           ║")
+				fmt.Println("║ 4  ║ Hiburan           ║")
+				fmt.Println("╚════╩══════════════════╝")
+				fmt.Printf("Masukkan kategori (1-4): ")
+				fmt.Scan(&pilihan)
+				switch pilihan {
+				case 1:
+					C[i].akomodasi = 0
+					kategori = "akomodasi"
+				case 2:
+					C[i].transportasi = 0
+					kategori = "transportasi"
+				case 3:
+					C[i].makanan = 0
+					kategori = "makanan"
+				case 4:
+					C[i].hiburan = 0
+					kategori = "hiburan"
+				default:
+					fmt.Println("Kategori tidak valid!")
+					return
+				}
+				fmt.Printf("Berhasil menghapus untuk %s di kategori %s\n", A[i].nama, kategori)
+				return
+			}
+		}
 	} else {
 		fmt.Print("id tidak di temukan")
 	}
-	for i = 0; i < n; i++ { //
+	/*for i = 0; i < n; i++ { //
 		if A[i].id == IDUser {
 			fmt.Println("╔════╦══════════════════╗")
 			fmt.Println("║ No ║     Kategori      ║")
@@ -313,7 +345,7 @@ func hapusPengeluaran(A tabPengguna, C *tabPengeluaran, n int) { // sudah rapih
 			fmt.Printf("Berhasil menghapus untuk %s di kategori %s\n", A[i].nama, kategori)
 			return
 		}
-	}
+	}*/
 }
 func lihatSemua(A tabPengguna, B tabPengeluaran, n int) { // sudah rapih
 	fmt.Println("╔════════╦════════════════╦════════════╦══════════════╦══════════╦══════════╗")
@@ -430,7 +462,7 @@ func cariPengeluaranSeq(A tabPengguna, B tabPengeluaran, n int) { // kalo pengeu
 	fmt.Printf("Pengeluaran terbanyak pada hiburan akomodasi sebesar %d oleh %s\n", maxhiburan, A[i].nama) // hiburan ga mau muncul
 }
 func urutkanPengeluaran(daftarPengguna *tabPengguna, daftarPengeluaran *tabPengeluaran, jumlahPengguna int) { // aman
-	// binarry search
+	// insertion
 	var i, j int
 	var penggunaSementara pengguna
 	var pengeluaranSementara Pengeluaran
@@ -465,4 +497,4 @@ func urutkanPengeluaran(daftarPengguna *tabPengguna, daftarPengeluaran *tabPenge
 }
 
 // cari pengeluaran seq itu gimana kalo total nya sama ?
-// ini batasan kalao salah masukin id di setiap func nya itu belum ada
+// ini batasan kalo salah masukin id di setiap func nya itu belum ada
